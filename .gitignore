@@ -1,0 +1,80 @@
+# Django-specific ignores
+*.log
+*.sqlite3
+*.db
+db.sqlite3
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+.venv/
+env/
+venv/
+ENV/
+
+# Python bytecode and metadata
+*.egg-info/
+*.egg
+*.coverage
+*.cover
+*.hypothesis/
+*.tox/
+*.mypy_cache/
+*.pytest_cache/
+*.coverage.*
+*.coveragerc
+*.coverage.*
+*.coveragerc
+
+# Django secret key and local settings
+*.env
+.env
+local_settings.py
+secret_key.txt
+
+# IDE and editor files
+.DS_Store
+*.vscode/
+
+# Build and package files
+dist/
+build/
+*.egg-info/
+*.whl
+
+# OS-generated files
+*.swp
+*~
+._*
+
+# Migration files (optional, uncomment if you manage migrations manually)
+# migrations/
+# *.pyc
+
+# Static and media files (if handled by a CDN or separate deployment)
+staticfiles/
+media/
+
+# Node.js/NPM (if using frontend tools with Django)
+node_modules/
+package-lock.json
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+*.old
+
+# Test artifacts
+htmlcov/
+.tox/
+.coverage
+.pytest_cache/

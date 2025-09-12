@@ -1,9 +1,11 @@
-from .serializers import OrderSerializer
-from rest_framework import viewsets, permissions
+from .serializers import WishlistSerializer
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import viewsets, permissions, status
 from rest_framework.filters import SearchFilter, OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
-from .models import Product, Review, Order
-from .serializers import ProductListSerializer, ProductDetailSerializer, ReviewSerializer
+from .models import Product, Review, Order, Wishlist
+from .serializers import ProductListSerializer, ProductDetailSerializer, ReviewSerializer, OrderSerializer
 
 
 class ProductViewSet(viewsets.ReadOnlyModelViewSet):
@@ -41,3 +43,42 @@ class OrderViewSet(viewsets.ModelViewSet):
 
     def get_serializer_context(self):
         return {'request': self.request}
+
+
+
+
+class WishlistAPIView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        wishlist, created = Wishlist.objects.get_or_create(user=request.user)
+        serializer = WishlistSerializer(wishlist)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        product_id = request.data.get('product_id')
+        if not product_id:
+            return Response({'error': 'Product ID is required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            product = Product.objects.get(id=product_id)
+        except Product.DoesNotExist:
+            return Response({'error': 'Product not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+        wishlist, created = Wishlist.objects.get_or_create(user=request.user)
+        wishlist.products.add(product)
+        return Response({'status': 'Product added to wishlist.'}, status=status.HTTP_200_OK)
+
+    def delete(self, request, *args, **kwargs):
+        product_id = request.data.get('product_id')
+        if not product_id:
+            return Response({'error': 'Product ID is required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            product = Product.objects.get(id=product_id)
+        except Product.DoesNotExist:
+            return Response({'error': 'Product not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+        wishlist, created = Wishlist.objects.get_or_create(user=request.user)
+        wishlist.products.remove(product)
+        return Response({'status': 'Product removed from wishlist.'}, status=status.HTTP_200_OK)

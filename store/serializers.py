@@ -3,7 +3,7 @@ from decimal import Decimal
 from django.db import transaction
 from django.db.models import F
 from rest_framework import serializers
-from .models import Product, Review, Color, Size, Order, OrderItem
+from .models import Product, Review, Color, Size, Order, OrderItem, Wishlist
 
 
 class ColorSerializer(serializers.ModelSerializer):
@@ -150,3 +150,11 @@ class OrderSerializer(serializers.ModelSerializer):
         return order
 
 
+# Wishlist
+# store/serializers.py
+class WishlistSerializer(serializers.ModelSerializer):
+    products = ProductListSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Wishlist
+        fields = ['id', 'user', 'products']

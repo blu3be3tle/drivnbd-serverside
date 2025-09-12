@@ -1,13 +1,13 @@
+import os
 from pathlib import Path
-
+import dj_database_url
+from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-SECRET_KEY = 'django-insecure-kls&8v02t_zxf$&=9154vx22jm^0o*x(n$sw23_*=-450-d_%+'
-
-
-DEBUG = True
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = []
 
@@ -21,7 +21,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-     'rest_framework',
+    'rest_framework',
     'rest_framework_simplejwt',
     'djoser',
     'django_filters',
@@ -64,10 +64,11 @@ WSGI_APPLICATION = 'drivnbd.wsgi.application'
 # Database
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    "default": dj_database_url.config(
+        default=config("DATABASE_URL"),
+        conn_max_age=600,
+        ssl_require=True
+    )
 }
 
 

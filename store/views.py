@@ -34,7 +34,12 @@ class ReviewViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
-        return Review.objects.filter(product_id=self.kwargs['product_pk'])
+        if getattr(self, 'swagger_fake_view', False):
+            return Review.objects.none()
+        product_pk = self.kwargs.get('product_pk')
+        if product_pk:
+            return Review.objects.filter(product_id=product_pk)
+        return Review.objects.none()
 
     def perform_create(self, serializer):
         product = Product.objects.get(pk=self.kwargs['product_pk'])
@@ -46,7 +51,11 @@ class OrderViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return Order.objects.filter(user=self.request.user).order_by('-created_at')
+        if getattr(self, 'swagger_fake_view', False):
+            return Order.objects.none()
+        if self.request.user.is_authenticated:
+            return Order.objects.filter(user=self.request.user).order_by('-created_at')
+        return Order.objects.none()
 
     def get_serializer_context(self):
         return {'request': self.request}

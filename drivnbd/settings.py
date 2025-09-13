@@ -27,12 +27,14 @@ INSTALLED_APPS = [
     'django_filters',
     'users',
     'store',
+    "debug_toolbar",
 ]
 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -64,7 +66,7 @@ WSGI_APPLICATION = 'drivnbd.wsgi.application'
 
 DATABASES = {
     "default": dj_database_url.config(
-        default=config("DATABASE_URL"), # pyright: ignore[reportArgumentType]
+        default=config("DATABASE_URL"),  # pyright: ignore[reportArgumentType]
         conn_max_age=600,
         ssl_require=True
     )
@@ -122,7 +124,9 @@ DJOSER = {
     'SEND_ACTIVATION_EMAIL': True,
     'ACTIVATION_URL': 'activate/{uid}/{token}',
     'SERIALIZERS': {
-        'user_create': 'accounts.serializers.UserCreateSerializer',
-        'user': 'accounts.serializers.UserSerializer',
+        'user_create': 'users.serializers.UserCreateSerializer',
+        'user': 'users.serializers.UserSerializer',
     },
 }
+
+AUTH_USER_MODEL = 'users.CustomUser'

@@ -21,19 +21,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'drf_yasg',
     'rest_framework',
     'rest_framework_simplejwt',
     'djoser',
     'django_filters',
     'users',
     'store',
+    "debug_toolbar",
 ]
-
 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -58,14 +60,14 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'drivnbd.wsgi.application'
+WSGI_APPLICATION = 'drivnbd.wsgi.app'
 
 
 # Database
 
 DATABASES = {
     "default": dj_database_url.config(
-        default=config("DATABASE_URL"),
+        default=config("DATABASE_URL"),  # pyright: ignore[reportArgumentType]
         conn_max_age=600,
         ssl_require=True
     )
@@ -116,3 +118,16 @@ REST_FRAMEWORK = {
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+DJOSER = {
+    'USER_ID_FIELD': 'id',
+    'LOGIN_FIELD': 'email',
+    'SEND_ACTIVATION_EMAIL': True,
+    'ACTIVATION_URL': 'activate/{uid}/{token}',
+    'SERIALIZERS': {
+        'user_create': 'users.serializers.UserCreateSerializer',
+        'user': 'users.serializers.UserSerializer',
+    },
+}
+
+AUTH_USER_MODEL = 'users.CustomUser'

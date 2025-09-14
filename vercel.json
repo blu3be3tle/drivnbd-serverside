@@ -1,15 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "builds": [
-    {
-      "src": "drivnbd/wsgi.py",
-      "use": "@vercel/python"
-    }
-  ],
   "functions": {
     "drivnbd/wsgi.py": {
-      "maxLambdaSize": "15mb",
       "runtime": "python3.13",
+      "maxLambdaSize": "15mb",
       "includeFiles": "staticfiles/**"
     }
   },

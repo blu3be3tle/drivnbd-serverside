@@ -1,13 +1,18 @@
 {
-    "builds": [{
+  "builds": [
+    {
       "src": "drivnbd/wsgi.py",
       "use": "@vercel/python",
-      "config": { "maxLambdaSize": "15mb", "runtime": "python3.13.5" }
-    }],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "drivnbd/wsgi.py"
+      "config": {
+        "maxLambdaSize": "15mb",
+        "runtime": "python3.13.5"
       }
-    ]
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "drivnbd/wsgi.py"
+    }
+  ]
 }

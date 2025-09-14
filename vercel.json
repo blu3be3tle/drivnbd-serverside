@@ -1,13 +1,21 @@
 {
-    "builds": [{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "builds": [
+    {
       "src": "drivnbd/wsgi.py",
-      "use": "@vercel/python",
-      "config": { "maxLambdaSize": "15mb", "runtime": "python3.13.5" }
-    }],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "drivnbd/wsgi.py"
-      }
-    ]
+      "use": "@vercel/python"
+    }
+  ],
+  "functions": {
+    "drivnbd/wsgi.py": {
+      "maxLambdaSize": "15mb",
+      "runtime": "python3.13",
+      "includeFiles": "staticfiles/**"
+    }
+  },
+  "buildCommand": "python manage.py collectstatic --noinput",
+  "routes": [
+    { "src": "/static/(.*)", "dest": "drivnbd/wsgi.py" },
+    { "src": "/(.*)", "dest": "drivnbd/wsgi.py" }
+  ]
 }

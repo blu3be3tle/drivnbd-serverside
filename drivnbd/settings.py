@@ -61,8 +61,7 @@ TEMPLATES = [
     },
 ]
 
-# ✅ Use `application` (Django standard), not `app`
-WSGI_APPLICATION = "drivnbd.wsgi.application"
+WSGI_APPLICATION = "drivnbd.wsgi.app"
 
 # Database
 DATABASES = {

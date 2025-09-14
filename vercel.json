@@ -1,14 +1,13 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "builds": [
-    {
-      "src": "drivnbd/wsgi.py",
-      "use": "@vercel/python"
+  "functions": {
+    "drivnbd/wsgi.py": {
+      "includeFiles": "staticfiles/**"
     }
-  ],
+  },
   "buildCommand": "python manage.py collectstatic --noinput",
   "routes": [
-    { "src": "/static/(.*)", "dest": "drivnbd/wsgi.py" },
-    { "src": "/(.*)", "dest": "drivnbd/wsgi.py" }
+    { "src": "^/static/(.*)$", "dest": "drivnbd/wsgi.py" },
+    { "src": "^(?!/static/).*", "dest": "drivnbd/wsgi.py" }
   ]
 }

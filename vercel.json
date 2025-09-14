@@ -1,12 +1,11 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "functions": {
-    "drivnbd/wsgi.py": {
-      "runtime": "python3.13",
-      "maxLambdaSize": "15mb",
-      "includeFiles": "staticfiles/**"
+  "builds": [
+    {
+      "src": "drivnbd/wsgi.py",
+      "use": "@vercel/python"
     }
-  },
+  ],
   "buildCommand": "python manage.py collectstatic --noinput",
   "routes": [
     { "src": "/static/(.*)", "dest": "drivnbd/wsgi.py" },

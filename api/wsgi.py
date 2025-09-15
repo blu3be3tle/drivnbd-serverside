@@ -1,8 +1,4 @@
-# api/wsgi.py — Vercel entrypoint that wraps your Django project
-import os
-import sys
-
-# Ensure project root is in sys.path
-sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
-
-from drivnbd.wsgi import application as app  # Vercel expects `app`
+# api/wsgi.py — Vercel serverless entrypoint that reuses your Django WSGI app
+import os, sys
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))  # add project root to PYTHONPATH
+from drivnbd.wsgi import app  # imports the `app` alias from your real wsgi

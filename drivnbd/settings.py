@@ -22,16 +22,15 @@ ALLOWED_HOSTS = [
 
 # --- APPLICATION DEFINITION ---
 INSTALLED_APPS = [
-    "django.contrib.admin",
+     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "whitenoise.runserver_nostatic", # Important for WhiteNoise
     "django.contrib.staticfiles",
     # Third-party apps
     "rest_framework",
-    "drf_yasg",
+    "drf_spectacular",
     "rest_framework_simplejwt",
     "djoser",
     "django_filters",
@@ -44,7 +43,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware", # Should be right after SecurityMiddleware
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -113,11 +112,23 @@ DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
 # --- AUTHENTICATION & DJOSER ---
 AUTH_USER_MODEL = "users.CustomUser"
+
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
-    )
+    ),
+    # Add this line to tell DRF to use drf-spectacular
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
+
+# Add these new settings for drf-spectacular
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'DrivnBD E-Commerce API',
+    'DESCRIPTION': 'API documentation for the DrivnBD online cloth store.',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+}
+
 DJOSER = {
     "USER_ID_FIELD": "id",
     "LOGIN_FIELD": "email",
@@ -142,4 +153,5 @@ cloudinary.config(
 
 # --- OTHER SETTINGS ---
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
 

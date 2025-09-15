@@ -1,34 +1,32 @@
 import os
 from pathlib import Path
+
+import cloudinary
 import dj_database_url
 from decouple import config
-import cloudinary
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# --- CORE SETTINGS ---
+# Core
 SECRET_KEY = config("SECRET_KEY")
-
-# DEBUG is True in local development (.env file) and False in production (Vercel env var)
-DEBUG = config('DEBUG', default=False, cast=bool)
-
+DEBUG = config("DEBUG", default=False, cast=bool)
 ALLOWED_HOSTS = [
-    "drivnbd-serverside.vercel.app",  # Your Vercel app domain
-    ".vercel.app",                    # Allows Vercel's preview domains
+    "drivnbd-serverside.vercel.app",
+    ".vercel.app",
     "127.0.0.1",
     "localhost",
 ]
 
-# --- APPLICATION DEFINITION ---
+# Apps
 INSTALLED_APPS = [
-     "django.contrib.admin",
+    # Django
+    "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # Third-party apps
+    # Third-party
     "rest_framework",
     "drf_spectacular",
     "rest_framework_simplejwt",
@@ -36,10 +34,14 @@ INSTALLED_APPS = [
     "django_filters",
     "cloudinary",
     "cloudinary_storage",
-    # Local apps
+    # Local
     "users",
     "store",
 ]
+
+# Debug Toolbar only when DEBUG=True
+if DEBUG:
+    INSTALLED_APPS.append("debug_toolbar")
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -51,14 +53,9 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
-
-# --- Conditionally add Django Debug Toolbar ---
 if DEBUG:
-    INSTALLED_APPS.append("debug_toolbar")
     MIDDLEWARE.append("debug_toolbar.middleware.DebugToolbarMiddleware")
-    INTERNAL_IPS = [
-        "127.0.0.1",
-    ]
+    INTERNAL_IPS = ["127.0.0.1"]
 
 ROOT_URLCONF = "drivnbd.urls"
 
@@ -79,7 +76,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "drivnbd.wsgi.application"
 
-# --- DATABASE ---
+# Database
 DATABASES = {
     "default": dj_database_url.config(
         default=config("DATABASE_URL"), # pyright: ignore[reportArgumentType]
@@ -88,7 +85,7 @@ DATABASES = {
     )
 }
 
-# --- PASSWORD VALIDATION ---
+# Passwords
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
@@ -96,13 +93,13 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
-# --- INTERNATIONALIZATION ---
+# I18N
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
-# --- STATIC & MEDIA FILES ---
+# Static & media
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
@@ -110,25 +107,24 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 MEDIA_URL = "/media/"
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
-# --- AUTHENTICATION & DJOSER ---
+# Auth / DRF
 AUTH_USER_MODEL = "users.CustomUser"
-
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
-    # Add this line to tell DRF to use drf-spectacular
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
-# Add these new settings for drf-spectacular
+# OpenAPI
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'DrivnBD E-Commerce API',
-    'DESCRIPTION': 'API documentation for the DrivnBD online cloth store.',
-    'VERSION': '1.0.0',
-    'SERVE_INCLUDE_SCHEMA': False,
+    "TITLE": "DrivnBD E-Commerce API",
+    "DESCRIPTION": "API documentation for the DrivnBD online cloth store.",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
 }
 
+# Djoser
 DJOSER = {
     "USER_ID_FIELD": "id",
     "LOGIN_FIELD": "email",
@@ -140,10 +136,10 @@ DJOSER = {
     },
 }
 
-# --- EMAIL ---
+# Email (dev)
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-# --- CLOUDINARY ---
+# Cloudinary
 cloudinary.config(
     cloud_name=config("CLOUD_NAME"),
     api_key=config("API_KEY"),
@@ -151,7 +147,4 @@ cloudinary.config(
     secure=True,
 )
 
-# --- OTHER SETTINGS ---
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-

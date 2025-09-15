@@ -4,43 +4,62 @@ import dj_database_url
 from decouple import config
 import cloudinary
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Security
+# --- CORE SETTINGS ---
 SECRET_KEY = config("SECRET_KEY")
-DEBUG = False
 
-ALLOWED_HOSTS = [".vercel.app", "127.0.0.1"]
+# DEBUG is True in local development (.env file) and False in production (Vercel env var)
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-# Application definition
+ALLOWED_HOSTS = [
+    "drivnbd-serverside.vercel.app",  # Your Vercel app domain
+    ".vercel.app",                    # Allows Vercel's preview domains
+    "127.0.0.1",
+    "localhost",
+]
+
+# --- APPLICATION DEFINITION ---
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "whitenoise.runserver_nostatic", # Important for WhiteNoise
     "django.contrib.staticfiles",
+    # Third-party apps
     "rest_framework",
     "drf_yasg",
     "rest_framework_simplejwt",
     "djoser",
     "django_filters",
+    "cloudinary",
+    "cloudinary_storage",
+    # Local apps
     "users",
     "store",
-    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware", 
+    "whitenoise.middleware.WhiteNoiseMiddleware", # Should be right after SecurityMiddleware
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
+
+# --- Conditionally add Django Debug Toolbar ---
+if DEBUG:
+    INSTALLED_APPS.append("debug_toolbar")
+    MIDDLEWARE.append("debug_toolbar.middleware.DebugToolbarMiddleware")
+    INTERNAL_IPS = [
+        "127.0.0.1",
+    ]
 
 ROOT_URLCONF = "drivnbd.urls"
 
@@ -61,16 +80,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "drivnbd.wsgi.application"
 
-# Database
+# --- DATABASE ---
 DATABASES = {
     "default": dj_database_url.config(
-        default=config("DATABASE_URL"),
+        default=config("DATABASE_URL"), # pyright: ignore[reportArgumentType]
         conn_max_age=600,
         ssl_require=True,
     )
 }
 
-# Password validation
+# --- PASSWORD VALIDATION ---
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
@@ -78,34 +97,27 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
-# Internationalization
+# --- INTERNATIONALIZATION ---
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
+# --- STATIC & MEDIA FILES ---
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
-# Default primary key field type
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-# Django REST Framework
+# --- AUTHENTICATION & DJOSER ---
+AUTH_USER_MODEL = "users.CustomUser"
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     )
 }
-
-# Email backend (development only)
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-
-# Djoser
 DJOSER = {
     "USER_ID_FIELD": "id",
     "LOGIN_FIELD": "email",
@@ -117,10 +129,10 @@ DJOSER = {
     },
 }
 
-# Custom user model
-AUTH_USER_MODEL = "users.CustomUser"
+# --- EMAIL ---
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-# Cloudinary config
+# --- CLOUDINARY ---
 cloudinary.config(
     cloud_name=config("CLOUD_NAME"),
     api_key=config("API_KEY"),
@@ -128,4 +140,6 @@ cloudinary.config(
     secure=True,
 )
 
-DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+# --- OTHER SETTINGS ---
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+

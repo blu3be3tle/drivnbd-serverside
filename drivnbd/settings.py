@@ -16,7 +16,6 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
 ]
-AUTH_USER_MODEL = 'users.User'
 
 # Apps
 INSTALLED_APPS = [
@@ -81,7 +80,7 @@ WSGI_APPLICATION = "drivnbd.wsgi.application"
 # Database
 DATABASES = {
     "default": dj_database_url.config(
-        default=config("DATABASE_URL"), # pyright: ignore[reportArgumentType]
+        default=config("DATABASE_URL"),  # pyright: ignore[reportArgumentType]
         conn_max_age=600,
         ssl_require=True,
     )
@@ -110,7 +109,7 @@ MEDIA_URL = "/media/"
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
 # Auth / DRF
-AUTH_USER_MODEL = "users.CustomUser"
+AUTH_USER_MODEL = 'users.User'
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",

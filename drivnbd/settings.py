@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     # Local
     "users",
     "store",
+    "order",
 ]
 
 # Debug Toolbar only when DEBUG=True

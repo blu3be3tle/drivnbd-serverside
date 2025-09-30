@@ -1,0 +1,194 @@
+[
+  {
+    "model": "product.category",
+    "pk": 1,
+    "fields": {
+      "name": "New Arrival",
+      "description": "Fresh drops and limited runs"
+    }
+  },
+  {
+    "model": "product.category",
+    "pk": 2,
+    "fields": {
+      "name": "Menswear",
+      "description": "Clothing and accessories for men"
+    }
+  },
+  {
+    "model": "product.category",
+    "pk": 3,
+    "fields": {
+      "name": "Babyssection",
+      "description": "Essentials and outfits for babies"
+    }
+  },
+  {
+    "model": "product.product",
+    "pk": 1,
+    "fields": {
+      "name": "Oversized Graphic Tee",
+      "description": "Soft cotton tee with seasonal artwork.",
+      "price": "24.90",
+      "stock": 120,
+      "image": null,
+      "category": 1,
+      "created_at": "2025-09-27T10:12:00.000000",
+      "updated_at": "2025-09-30T08:05:00.000000"
+    }
+  },
+  {
+    "model": "product.product",
+    "pk": 2,
+    "fields": {
+      "name": "Corduroy Shirt Jacket",
+      "description": "Midweight shacket with snap buttons.",
+      "price": "59.50",
+      "stock": 64,
+      "image": null,
+      "category": 1,
+      "created_at": "2025-09-25T16:40:00.000000",
+      "updated_at": "2025-09-29T13:22:00.000000"
+    }
+  },
+  {
+    "model": "product.product",
+    "pk": 3,
+    "fields": {
+      "name": "Relaxed Fit Cargo Pants",
+      "description": "Utility-inspired cargos with adjustable hem.",
+      "price": "48.75",
+      "stock": 83,
+      "image": null,
+      "category": 1,
+      "created_at": "2025-09-28T09:05:00.000000",
+      "updated_at": "2025-09-30T07:55:00.000000"
+    }
+  },
+  {
+    "model": "product.product",
+    "pk": 4,
+    "fields": {
+      "name": "Water-Resistant Parka",
+      "description": "Lightweight parka with hidden hood.",
+      "price": "89.00",
+      "stock": 41,
+      "image": null,
+      "category": 1,
+      "created_at": "2025-09-22T12:30:00.000000",
+      "updated_at": "2025-09-26T18:10:00.000000"
+    }
+  },
+  {
+    "model": "product.product",
+    "pk": 5,
+    "fields": {
+      "name": "Oxford Button-Down Shirt",
+      "description": "Crisp oxford with a modern cut.",
+      "price": "34.95",
+      "stock": 137,
+      "image": null,
+      "category": 2,
+      "created_at": "2025-09-23T11:00:00.000000",
+      "updated_at": "2025-09-29T09:42:00.000000"
+    }
+  },
+  {
+    "model": "product.product",
+    "pk": 6,
+    "fields": {
+      "name": "Slim Stretch Chinos",
+      "description": "Everyday chinos with 2-way stretch.",
+      "price": "42.00",
+      "stock": 158,
+      "image": null,
+      "category": 2,
+      "created_at": "2025-09-20T15:35:00.000000",
+      "updated_at": "2025-09-28T17:15:00.000000"
+    }
+  },
+  {
+    "model": "product.product",
+    "pk": 7,
+    "fields": {
+      "name": "Merino Wool Crewneck",
+      "description": "Lightweight knit for layering.",
+      "price": "54.80",
+      "stock": 72,
+      "image": null,
+      "category": 2,
+      "created_at": "2025-09-26T19:25:00.000000",
+      "updated_at": "2025-09-30T06:10:00.000000"
+    }
+  },
+  {
+    "model": "product.product",
+    "pk": 8,
+    "fields": {
+      "name": "Leather Belt",
+      "description": "Full-grain leather with matte buckle.",
+      "price": "21.50",
+      "stock": 190,
+      "image": null,
+      "category": 2,
+      "created_at": "2025-09-24T08:05:00.000000",
+      "updated_at": "2025-09-27T14:48:00.000000"
+    }
+  },
+  {
+    "model": "product.product",
+    "pk": 9,
+    "fields": {
+      "name": "Organic Cotton Onesie (2-Pack)",
+      "description": "Envelope neck and snap closure for easy changes.",
+      "price": "18.20",
+      "stock": 210,
+      "image": null,
+      "category": 3,
+      "created_at": "2025-09-21T10:55:00.000000",
+      "updated_at": "2025-09-29T20:30:00.000000"
+    }
+  },
+  {
+    "model": "product.product",
+    "pk": 10,
+    "fields": {
+      "name": "Baby Knit Cardigan",
+      "description": "Cozy button-front cardigan for cooler days.",
+      "price": "26.40",
+      "stock": 95,
+      "image": null,
+      "category": 3,
+      "created_at": "2025-09-28T07:20:00.000000",
+      "updated_at": "2025-09-30T04:45:00.000000"
+    }
+  },
+  {
+    "model": "product.product",
+    "pk": 11,
+    "fields": {
+      "name": "Swaddle Blanket",
+      "description": "Breathable muslin swaddle, 110×110 cm.",
+      "price": "14.99",
+      "stock": 175,
+      "image": null,
+      "category": 3,
+      "created_at": "2025-09-22T09:10:00.000000",
+      "updated_at": "2025-09-26T07:58:00.000000"
+    }
+  },
+  {
+    "model": "product.product",
+    "pk": 12,
+    "fields": {
+      "name": "Baby Booties",
+      "description": "Soft sole booties with gentle elastic.",
+      "price": "12.50",
+      "stock": 132,
+      "image": null,
+      "category": 3,
+      "created_at": "2025-09-29T13:05:00.000000",
+      "updated_at": "2025-09-30T05:22:00.000000"
+    }
+  }
+]

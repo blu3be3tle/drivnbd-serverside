@@ -20,7 +20,7 @@ class Product(models.Model):
     stock = models.PositiveIntegerField(default=0)
     image = CloudinaryField('image')
     category = models.ForeignKey(
-        Category, on_delete=models.CASCADE, related_name="products")
+        Category, on_delete=models.CASCADE, null=True, blank=True, related_name="products")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -29,6 +29,12 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name='images')
+    image = CloudinaryField('image')
 
 
 class Review(models.Model):

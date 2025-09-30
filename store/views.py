@@ -1,37 +1,58 @@
-from rest_framework import viewsets, permissions
-from rest_framework.filters import SearchFilter, OrderingFilter
+
+from .models import Product, Category, Review, ProductImage
+from .serializers import ProductSerializer, CategorySerializer, ReviewSerializer, ProductImageSerializer
+from django.db.models import Count
+from rest_framework.viewsets import ModelViewSet
 from django_filters.rest_framework import DjangoFilterBackend
-
-from .models import Product, Review
-from .serializers import (
-    ProductListSerializer, ProductDetailSerializer,
-    ReviewSerializer
-)
+from rest_framework.filters import SearchFilter, OrderingFilter
 
 
-class ProductViewSet(viewsets.ReadOnlyModelViewSet):
+class ProductViewSet(ModelViewSet):
+    """
+    API endpoint for managing products in the e-commerce store
+     - Allows authenticated admin to create, update, and delete products
+     - Allows users to browse and filter product
+     - Support searching by name, description, and category
+     - Support ordering by price and updated_at
+    """
     queryset = Product.objects.all()
+    serializer_class = ProductSerializer
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
-    filterset_fields = ['sizes__name', 'colors__name']
     search_fields = ['name', 'description']
-    ordering_fields = ['price', 'created_at']
+    ordering_fields = ['price', 'updated_at']
 
-    def get_serializer_class(self):
-        return ProductListSerializer if self.action == 'list' else ProductDetailSerializer
+    def create(self, request, *args, **kwargs):
+        """Only authenticated admin can create product"""
+        return super().create(request, *args, **kwargs)
 
 
-class ReviewViewSet(viewsets.ModelViewSet):
-    serializer_class = ReviewSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+class ProductImageViewSet(ModelViewSet):
+    serializer_class = ProductImageSerializer
 
     def get_queryset(self):
-        if getattr(self, 'swagger_fake_view', False):
-            return Review.objects.none()
-        product_pk = self.kwargs.get('product_pk')
-        if product_pk:
-            return Review.objects.filter(product_id=product_pk)
-        return Review.objects.none()
+        return ProductImage.objects.filter(product_id=self.kwargs.get('product_pk'))
 
     def perform_create(self, serializer):
-        product = Product.objects.get(pk=self.kwargs['product_pk'])
-        serializer.save(user=self.request.user, product=product)
+        serializer.save(product_id=self.kwargs.get('product_pk'))
+
+
+class CategoryViewSet(ModelViewSet):
+    queryset = Category.objects.annotate(
+        product_count=Count('products')).all()
+    serializer_class = CategorySerializer
+
+
+class ReviewViewSet(ModelViewSet):
+    serializer_class = ReviewSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+    def perform_update(self, serializer):
+        serializer.save(user=self.request.user)
+
+    def get_queryset(self):
+        return Review.objects.filter(product_id=self.kwargs.get('product_pk'))
+
+    def get_serializer_context(self):
+        return {'product_id': self.kwargs.get('product_pk')}

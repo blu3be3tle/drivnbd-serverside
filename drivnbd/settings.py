@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "users",
     "store",
     "order",
+    "api"
 ]
 
 # Debug Toolbar only when DEBUG=True

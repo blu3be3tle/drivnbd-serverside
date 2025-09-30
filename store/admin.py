@@ -1,13 +1,7 @@
 from django.contrib import admin
-from .models import Product, Color, Size, Review
+from .models import Product, Review, Category
 
 
-@admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price', 'stock', 'average_rating')
-    search_fields = ('name',)
-
-
-admin.site.register(Color)
-admin.site.register(Size)
+admin.site.register(Category)
+admin.site.register(Product)
 admin.site.register(Review)

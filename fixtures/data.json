@@ -1,6 +1,6 @@
 [
   {
-    "model": "product.category",
+    "model": "store.category",
     "pk": 1,
     "fields": {
       "name": "New Arrival",
@@ -8,7 +8,7 @@
     }
   },
   {
-    "model": "product.category",
+    "model": "store.category",
     "pk": 2,
     "fields": {
       "name": "Menswear",
@@ -16,7 +16,7 @@
     }
   },
   {
-    "model": "product.category",
+    "model": "store.category",
     "pk": 3,
     "fields": {
       "name": "Babyssection",
@@ -24,7 +24,7 @@
     }
   },
   {
-    "model": "product.product",
+    "model": "store.product",
     "pk": 1,
     "fields": {
       "name": "Oversized Graphic Tee",
@@ -38,7 +38,7 @@
     }
   },
   {
-    "model": "product.product",
+    "model": "store.product",
     "pk": 2,
     "fields": {
       "name": "Corduroy Shirt Jacket",
@@ -52,7 +52,7 @@
     }
   },
   {
-    "model": "product.product",
+    "model": "store.product",
     "pk": 3,
     "fields": {
       "name": "Relaxed Fit Cargo Pants",
@@ -66,7 +66,7 @@
     }
   },
   {
-    "model": "product.product",
+    "model": "store.product",
     "pk": 4,
     "fields": {
       "name": "Water-Resistant Parka",
@@ -80,7 +80,7 @@
     }
   },
   {
-    "model": "product.product",
+    "model": "store.product",
     "pk": 5,
     "fields": {
       "name": "Oxford Button-Down Shirt",
@@ -94,7 +94,7 @@
     }
   },
   {
-    "model": "product.product",
+    "model": "store.product",
     "pk": 6,
     "fields": {
       "name": "Slim Stretch Chinos",
@@ -108,7 +108,7 @@
     }
   },
   {
-    "model": "product.product",
+    "model": "store.product",
     "pk": 7,
     "fields": {
       "name": "Merino Wool Crewneck",
@@ -122,7 +122,7 @@
     }
   },
   {
-    "model": "product.product",
+    "model": "store.product",
     "pk": 8,
     "fields": {
       "name": "Leather Belt",
@@ -136,7 +136,7 @@
     }
   },
   {
-    "model": "product.product",
+    "model": "store.product",
     "pk": 9,
     "fields": {
       "name": "Organic Cotton Onesie (2-Pack)",
@@ -150,7 +150,7 @@
     }
   },
   {
-    "model": "product.product",
+    "model": "store.product",
     "pk": 10,
     "fields": {
       "name": "Baby Knit Cardigan",
@@ -164,7 +164,7 @@
     }
   },
   {
-    "model": "product.product",
+    "model": "store.product",
     "pk": 11,
     "fields": {
       "name": "Swaddle Blanket",
@@ -178,7 +178,7 @@
     }
   },
   {
-    "model": "product.product",
+    "model": "store.product",
     "pk": 12,
     "fields": {
       "name": "Baby Booties",

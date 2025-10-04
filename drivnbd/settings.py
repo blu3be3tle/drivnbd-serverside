@@ -33,10 +33,10 @@ INSTALLED_APPS = [
     "cloudinary",
     "cloudinary_storage",
     # Local
+    "api",
     "users",
     "store",
     "order",
-    "api"
 ]
 
 # Debug Toolbar only when DEBUG=True

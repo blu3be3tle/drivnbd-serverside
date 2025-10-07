@@ -24,22 +24,14 @@ class AddCartItemSerializer(serializers.ModelSerializer):
 
     def save(self, **kwargs):
         cart_id = self.context['cart_id']
-
-        if not hasattr(self, 'validated_data') or not self.validated_data:
-            raise AssertionError("You must call `.is_valid()` before calling `.save()`.")
-
         product_id = self.validated_data['product_id']
         quantity = self.validated_data['quantity']
-
-        if product_id is None or quantity is None:
-            raise serializers.ValidationError("Missing product_id or quantity in validated_data.")
 
         try:
             cart_item = CartItem.objects.get(
                 cart_id=cart_id, product_id=product_id)
             cart_item.quantity += quantity
-            cart_item.save()
-            self.instance = cart_item
+            self.instance = cart_item.save()
         except CartItem.DoesNotExist:
             self.instance = CartItem.objects.create(
                 cart_id=cart_id, **self.validated_data)

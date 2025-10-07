@@ -11,7 +11,8 @@ from rest_framework.response import Response
 
 
 class CartViewSet(CreateModelMixin, RetrieveModelMixin, DestroyModelMixin, GenericViewSet):
-    serializer_class = CartSerializer   
+    serializer_class = CartSerializer
+    permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

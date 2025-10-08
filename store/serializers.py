@@ -52,12 +52,11 @@ class SimpleUserSerializer(serializers.ModelSerializer):
 
 
 class ReviewSerializer(serializers.ModelSerializer):
-    # user = SimpleUserSerializer()
     user = serializers.SerializerMethodField(method_name='get_user')
 
     class Meta:
         model = Review
-        fields = ['id', 'user', 'product', 'ratings', 'comment']
+        fields = ['id', 'user', 'product', 'rating', 'comment']
         read_only_fields = ['user', 'product']
 
     def get_user(self, obj):

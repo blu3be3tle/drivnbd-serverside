@@ -8,7 +8,8 @@ class OrderService:
     def create_order(user_id, cart_id):
         with transaction.atomic():
             cart = Cart.objects.get(pk=cart_id)
-            cart_items = CartItem.objects.filter(cart=cart).select_related('product').all()
+            cart_items = CartItem.objects.filter(
+                cart=cart).select_related('product').all()
             total_price = sum([item.product.price *
                                item.quantity for item in cart_items])
 
@@ -25,7 +26,6 @@ class OrderService:
                 )
                 for item in cart_items
             ]
-            # [<OrderItem(1)>, <OrderItem(2)>]
             OrderItem.objects.bulk_create(order_items)
 
             cart.delete()
@@ -41,10 +41,10 @@ class OrderService:
 
         if order.user != user:
             raise PermissionDenied(
-                {"detail": "You can only cancel your own order"})
+                {"detail": "You can only cancel your own order."})
 
         if order.status == Order.DELIVERED:
-            raise ValidationError({"detail": "You can not cancel an order"})
+            raise ValidationError({"detail": "You cannot cancel an order once it is delivered."})
 
         order.status = Order.CANCELED
         order.save()

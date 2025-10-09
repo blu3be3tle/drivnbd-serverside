@@ -1,9 +1,8 @@
-import os
 from pathlib import Path
-
 import cloudinary
 import dj_database_url
 from decouple import config
+from datetime import timedelta
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -16,7 +15,6 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
 ]
-AUTH_USER_MODEL = 'users.User'
 
 # Apps
 INSTALLED_APPS = [
@@ -28,16 +26,18 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # Third-party
+    "drf_yasg",
     "rest_framework",
-    "drf_spectacular",
     "rest_framework_simplejwt",
     "djoser",
     "django_filters",
     "cloudinary",
     "cloudinary_storage",
     # Local
+    "api",
     "users",
     "store",
+    "order",
 ]
 
 # Debug Toolbar only when DEBUG=True
@@ -80,7 +80,7 @@ WSGI_APPLICATION = "drivnbd.wsgi.application"
 # Database
 DATABASES = {
     "default": dj_database_url.config(
-        default=config("DATABASE_URL"), # pyright: ignore[reportArgumentType]
+        default=config("DATABASE_URL"),  # pyright: ignore[reportArgumentType]
         conn_max_age=600,
         ssl_require=True,
     )
@@ -104,41 +104,60 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
 MEDIA_URL = "/media/"
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
 # Auth / DRF
-AUTH_USER_MODEL = "users.CustomUser"
+AUTH_USER_MODEL = 'users.User'
+
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    'COERCE_DECIMAL_TO_STRING': False,
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
-    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
-# OpenAPI
-SPECTACULAR_SETTINGS = {
-    "TITLE": "DrivnBD E-Commerce API",
-    "DESCRIPTION": "API documentation for the DrivnBD online cloth store.",
-    "VERSION": "1.0.0",
-    "SERVE_INCLUDE_SCHEMA": False,
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('JWT',),
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+}
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header',
+            'description': 'Enter your JWT token in the format: `JWT <your_token>`'
+        }
+    }
 }
 
 # Djoser
 DJOSER = {
-    "USER_ID_FIELD": "id",
-    "LOGIN_FIELD": "email",
-    "SEND_ACTIVATION_EMAIL": True,
-    "ACTIVATION_URL": "activate/{uid}/{token}",
+    'EMAIL_FRONTEND_PROTOCOL': config('FRONTEND_PROTOCOL'),
+    'EMAIL_FRONTEND_DOMAIN': config('FRONTEND_DOMAIN'),
+    'EMAIL_FRONTEND_SITE_NAME': 'DrivnBD',
+    'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': 'activate/{uid}/{token}',
+    'SEND_ACTIVATION_EMAIL': True,
     "SERIALIZERS": {
         "user_create": "users.serializers.UserCreateSerializer",
-        "user": "users.serializers.UserSerializer",
+        "current_user": "users.serializers.UserSerializer",
     },
 }
 
+
 # Email (dev)
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = config('EMAIL_BACKEND')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
+BACKEND_URL = config("BACKEND_URL")
+FRONTEND_URL = config("FRONTEND_URL")
 
 # Cloudinary
 cloudinary.config(

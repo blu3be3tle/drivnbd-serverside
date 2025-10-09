@@ -1,3 +1,5 @@
+jwt.json
+
 # Django-specific ignores
 *.log
 *.sqlite3

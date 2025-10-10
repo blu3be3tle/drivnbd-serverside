@@ -1,14 +1,16 @@
 
 from store.models import Product, Category, Review, ProductImage
-from store.serializers import ProductSerializer, CategorySerializer, ReviewSerializer, ProductImageSerializer
-from django.db.models import Count
-from rest_framework.viewsets import ModelViewSet
-from django_filters.rest_framework import DjangoFilterBackend
 from store.filters import ProductFilter
-from rest_framework.filters import SearchFilter, OrderingFilter
+from store.serializers import ProductSerializer, CategorySerializer, ReviewSerializer, ProductImageSerializer
 from store.pagination import DefaultPagination
-from api.permissions import IsAdminOrReadOnly
 from store.permissions import IsReviewAuthorOrReadonly
+from api.permissions import IsAdminOrReadOnly
+from django.db.models import Count
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter, OrderingFilter
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.decorators import action
+from rest_framework.response import Response
 from drf_yasg.utils import swagger_auto_schema
 
 
@@ -48,6 +50,17 @@ class ProductViewSet(ModelViewSet):
     def create(self, request, *args, **kwargs):
         """Only authenticated admin can create product"""
         return super().create(request, *args, **kwargs)
+
+    @action(detail=False, methods=['get'])
+    def featured(self, request):
+        """Return all featured products"""
+        queryset = self.get_queryset().filter(featured=True)
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_paginated_response(page, many=True)
+            return self.get_paginated_response(serializer.data)
+        serializer = self.get_paginated_response(queryset, many=True)
+        return Response(serializer.data)
 
 
 class ProductImageViewSet(ModelViewSet):

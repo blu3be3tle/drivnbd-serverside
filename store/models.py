@@ -21,6 +21,7 @@ class Product(models.Model):
     image = CloudinaryField('image')
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, null=True, blank=True, related_name="products")
+    featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

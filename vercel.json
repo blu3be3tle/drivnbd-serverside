@@ -1,18 +1,12 @@
 {
-  "builds": [
-    {
-      "src": "drivnbd/wsgi.py",
-      "use": "@vercel/python",
-      "config": {
-        "maxLambdaSize": "15mb",
-        "runtime": "python3.13.5"
-      }
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "drivnbd/wsgi.py": {
+      "runtime": "python3.12",
+      "memory": 1024,
+      "maxDuration": 10
     }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "drivnbd/wsgi.py"
-    }
-  ]
+  },
+  "rewrites": [{ "source": "/(.*)", "destination": "/drivnbd/wsgi.py" }],
+  "buildCommand": "python -m pip install -U pip && pip install -r requirements.txt && python manage.py collectstatic --noinput"
 }

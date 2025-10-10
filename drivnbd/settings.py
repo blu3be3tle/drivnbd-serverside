@@ -1,3 +1,4 @@
+from urllib.parse import urlparse
 from pathlib import Path
 import cloudinary
 import dj_database_url
@@ -16,8 +17,14 @@ ALLOWED_HOSTS = [
     "localhost",
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.vercel.app",
+    "https://drivnbd-serverside.vercel.app",
+]
+
 # Apps
 INSTALLED_APPS = [
+    "whitenoise.runserver_nostatic",
     # Django
     "django.contrib.admin",
     "django.contrib.auth",
@@ -135,9 +142,6 @@ SWAGGER_SETTINGS = {
 
 # Djoser
 DJOSER = {
-    'EMAIL_FRONTEND_PROTOCOL': config('FRONTEND_PROTOCOL'),
-    'EMAIL_FRONTEND_DOMAIN': config('FRONTEND_DOMAIN'),
-    'EMAIL_FRONTEND_SITE_NAME': 'DrivnBD',
     'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL': 'activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
@@ -156,8 +160,6 @@ EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
-BACKEND_URL = config("BACKEND_URL")
-FRONTEND_URL = config("FRONTEND_URL")
 
 # Cloudinary
 cloudinary.config(

@@ -82,7 +82,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "drivnbd.wsgi.application"
+WSGI_APPLICATION = "drivnbd.wsgi.app"
 
 # Database
 DATABASES = {

@@ -16,11 +16,11 @@ Deployed on **Vercel**, connected to a **PostgreSQL (Supabase)** database, and i
 
 ## ⚙️ Tech Stack
 
-- **Backend:** Django 5 + Django REST Framework  
-- **Database:** PostgreSQL (Supabase)  
-- **Authentication:** JWT (via `djangorestframework-simplejwt`)  
-- **Media Storage:** Cloudinary  
-- **Docs:** Swagger UI (via `drf-yasg`)  
+- **Backend:** Django 5 + Django REST Framework
+- **Database:** PostgreSQL (Supabase)
+- **Authentication:** JWT (via `djangorestframework-simplejwt`)
+- **Media Storage:** Cloudinary
+- **Docs:** Swagger UI (via `drf-yasg`)
 - **Deployment:** Vercel (Serverless WSGI app)
 
 ---
@@ -28,24 +28,31 @@ Deployed on **Vercel**, connected to a **PostgreSQL (Supabase)** database, and i
 ## 📂 Project Structure
 
 drivnbd/
-├── api/                # Core API endpoints
-├── users/              # Custom user model and authentication
-├── store/              # Product catalog, categories, featured items
-├── order/              # Order management and checkout logic
+
+├── api/ # Core API endpoints
+
+├── users/ # Custom user model and authentication
+
+├── store/ # Product catalog, categories, featured items
+
+├── order/ # Order management and checkout logic
+
 ├── drivnbd/settings.py # Main configuration
-├── drivnbd/wsgi.py     # WSGI entrypoint for Vercel
+
+├── drivnbd/wsgi.py # WSGI entrypoint for Vercel
+
 └── requirements.txt
 
 ---
 
 ## 🧰 Features
 
-- 🧾 **RESTful API** with Django REST Framework  
-- 🧑‍💼 **JWT authentication** via Djoser  
-- 🧺 **Product categories, stock, and featured items**  
-- ☁️ **Cloudinary integration** for image/media uploads  
-- 📊 **Swagger documentation** (via DRF YASG)  
-- 🧱 **Vercel Serverless deployment** with WhiteNoise for static assets  
+- 🧾 **RESTful API** with Django REST Framework
+- 🧑‍💼 **JWT authentication** via Djoser
+- 🧺 **Product categories, stock, and featured items**
+- ☁️ **Cloudinary integration** for image/media uploads
+- 📊 **Swagger documentation** (via DRF YASG)
+- 🧱 **Vercel Serverless deployment** with WhiteNoise for static assets
 - 🔐 Secure production configuration using environment variables
 
 ---
@@ -53,6 +60,7 @@ drivnbd/
 ## 🧑‍💻 Local Development
 
 ### 1️⃣ Clone the repository
+
 ```bash
 git clone https://github.com/blu3be3tle/drivnbd-server.git
 cd drivnbd-server
@@ -100,19 +108,21 @@ The backend is configured for Vercel’s Python 3.12 serverless runtime.
 vercel.json
 
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "functions": {
-    "drivnbd/wsgi.py": {
-      "runtime": "python3.12",
-      "memory": 1024,
-      "maxDuration": 10
+  "builds": [
+    {
+      "src": "drivnbd/wsgi.py",
+      "use": "@vercel/python",
+      "config": { "maxLambdaSize": "15mb", "runtime": "python3.11.3" }
     }
-  },
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/drivnbd/wsgi.py" }
   ],
-  "buildCommand": "python -m pip install -U pip && pip install -r requirements.txt && python manage.py collectstatic --noinput"
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "drivnbd/wsgi.py"
+    }
+  ]
 }
+
 
 ⚠️ Make sure to set all environment variables in your Vercel dashboard
 (Settings → Environment Variables) before deploying.
@@ -143,3 +153,4 @@ This project is licensed under the MIT License.
 
 
 “DrivnBD — crafted for speed, style, and seamless e-commerce.”
+```

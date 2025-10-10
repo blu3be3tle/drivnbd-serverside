@@ -23,16 +23,18 @@
       "description": "Essentials and outfits for babies"
     }
   },
+
   {
     "model": "store.product",
     "pk": 1,
     "fields": {
       "name": "Oversized Graphic Tee",
       "description": "Soft cotton tee with seasonal artwork.",
-      "price": "24.90",
+      "price": "2490",
       "stock": 120,
       "image": null,
       "category": 1,
+      "featured": true,
       "created_at": "2025-09-27T10:12:00.000000",
       "updated_at": "2025-09-30T08:05:00.000000"
     }
@@ -43,10 +45,11 @@
     "fields": {
       "name": "Corduroy Shirt Jacket",
       "description": "Midweight shacket with snap buttons.",
-      "price": "59.50",
+      "price": "5950",
       "stock": 64,
       "image": null,
       "category": 1,
+      "featured": false,
       "created_at": "2025-09-25T16:40:00.000000",
       "updated_at": "2025-09-29T13:22:00.000000"
     }
@@ -57,10 +60,11 @@
     "fields": {
       "name": "Relaxed Fit Cargo Pants",
       "description": "Utility-inspired cargos with adjustable hem.",
-      "price": "48.75",
+      "price": "4890",
       "stock": 83,
       "image": null,
       "category": 1,
+      "featured": false,
       "created_at": "2025-09-28T09:05:00.000000",
       "updated_at": "2025-09-30T07:55:00.000000"
     }
@@ -71,10 +75,11 @@
     "fields": {
       "name": "Water-Resistant Parka",
       "description": "Lightweight parka with hidden hood.",
-      "price": "89.00",
+      "price": "8900",
       "stock": 41,
       "image": null,
       "category": 1,
+      "featured": false,
       "created_at": "2025-09-22T12:30:00.000000",
       "updated_at": "2025-09-26T18:10:00.000000"
     }
@@ -85,10 +90,11 @@
     "fields": {
       "name": "Oxford Button-Down Shirt",
       "description": "Crisp oxford with a modern cut.",
-      "price": "34.95",
+      "price": "3490",
       "stock": 137,
       "image": null,
       "category": 2,
+      "featured": false,
       "created_at": "2025-09-23T11:00:00.000000",
       "updated_at": "2025-09-29T09:42:00.000000"
     }
@@ -99,10 +105,11 @@
     "fields": {
       "name": "Slim Stretch Chinos",
       "description": "Everyday chinos with 2-way stretch.",
-      "price": "42.00",
+      "price": "4200",
       "stock": 158,
       "image": null,
       "category": 2,
+      "featured": false,
       "created_at": "2025-09-20T15:35:00.000000",
       "updated_at": "2025-09-28T17:15:00.000000"
     }
@@ -113,10 +120,11 @@
     "fields": {
       "name": "Merino Wool Crewneck",
       "description": "Lightweight knit for layering.",
-      "price": "54.80",
+      "price": "5490",
       "stock": 72,
       "image": null,
       "category": 2,
+      "featured": true,
       "created_at": "2025-09-26T19:25:00.000000",
       "updated_at": "2025-09-30T06:10:00.000000"
     }
@@ -127,10 +135,11 @@
     "fields": {
       "name": "Leather Belt",
       "description": "Full-grain leather with matte buckle.",
-      "price": "21.50",
+      "price": "2150",
       "stock": 190,
       "image": null,
       "category": 2,
+      "featured": false,
       "created_at": "2025-09-24T08:05:00.000000",
       "updated_at": "2025-09-27T14:48:00.000000"
     }
@@ -141,10 +150,11 @@
     "fields": {
       "name": "Organic Cotton Onesie (2-Pack)",
       "description": "Envelope neck and snap closure for easy changes.",
-      "price": "18.20",
+      "price": "1790",
       "stock": 210,
       "image": null,
       "category": 3,
+      "featured": false,
       "created_at": "2025-09-21T10:55:00.000000",
       "updated_at": "2025-09-29T20:30:00.000000"
     }
@@ -155,10 +165,11 @@
     "fields": {
       "name": "Baby Knit Cardigan",
       "description": "Cozy button-front cardigan for cooler days.",
-      "price": "26.40",
+      "price": "2690",
       "stock": 95,
       "image": null,
       "category": 3,
+      "featured": false,
       "created_at": "2025-09-28T07:20:00.000000",
       "updated_at": "2025-09-30T04:45:00.000000"
     }
@@ -169,10 +180,11 @@
     "fields": {
       "name": "Swaddle Blanket",
       "description": "Breathable muslin swaddle, 110×110 cm.",
-      "price": "14.99",
+      "price": "1490",
       "stock": 175,
       "image": null,
       "category": 3,
+      "featured": false,
       "created_at": "2025-09-22T09:10:00.000000",
       "updated_at": "2025-09-26T07:58:00.000000"
     }
@@ -183,12 +195,374 @@
     "fields": {
       "name": "Baby Booties",
       "description": "Soft sole booties with gentle elastic.",
-      "price": "12.50",
+      "price": "1290",
       "stock": 132,
       "image": null,
       "category": 3,
+      "featured": false,
       "created_at": "2025-09-29T13:05:00.000000",
       "updated_at": "2025-09-30T05:22:00.000000"
+    }
+  },
+
+  {
+    "model": "store.product",
+    "pk": 13,
+    "fields": {
+      "name": "Denim Work Shirt",
+      "description": "Washed denim with snap buttons.",
+      "price": "3990",
+      "stock": 88,
+      "image": null,
+      "category": 2,
+      "featured": false,
+      "created_at": "2025-09-19T10:00:00.000000",
+      "updated_at": "2025-09-27T12:00:00.000000"
+    }
+  },
+  {
+    "model": "store.product",
+    "pk": 14,
+    "fields": {
+      "name": "Tech Fleece Hoodie",
+      "description": "Double-knit fleece with clean lines.",
+      "price": "4990",
+      "stock": 110,
+      "image": null,
+      "category": 1,
+      "featured": false,
+      "created_at": "2025-09-30T09:30:00.000000",
+      "updated_at": "2025-10-01T11:10:00.000000"
+    }
+  },
+  {
+    "model": "store.product",
+    "pk": 15,
+    "fields": {
+      "name": "Denim Trucker Jacket",
+      "description": "Classic fit with adjustable hem tabs.",
+      "price": "6490",
+      "stock": 57,
+      "image": null,
+      "category": 1,
+      "featured": true,
+      "created_at": "2025-09-29T14:05:00.000000",
+      "updated_at": "2025-10-01T08:45:00.000000"
+    }
+  },
+  {
+    "model": "store.product",
+    "pk": 16,
+    "fields": {
+      "name": "Ribbed Beanie",
+      "description": "Cozy knit beanie with fold-over cuff.",
+      "price": "1290",
+      "stock": 220,
+      "image": null,
+      "category": 2,
+      "featured": false,
+      "created_at": "2025-09-21T08:50:00.000000",
+      "updated_at": "2025-09-24T10:10:00.000000"
+    }
+  },
+  {
+    "model": "store.product",
+    "pk": 17,
+    "fields": {
+      "name": "Thermal Long Sleeve",
+      "description": "Waffle knit base layer.",
+      "price": "2190",
+      "stock": 140,
+      "image": null,
+      "category": 1,
+      "featured": false,
+      "created_at": "2025-09-23T12:20:00.000000",
+      "updated_at": "2025-09-30T07:40:00.000000"
+    }
+  },
+  {
+    "model": "store.product",
+    "pk": 18,
+    "fields": {
+      "name": "Puffer Vest",
+      "description": "Lightweight insulation, packable design.",
+      "price": "5590",
+      "stock": 62,
+      "image": null,
+      "category": 1,
+      "featured": false,
+      "created_at": "2025-09-25T10:15:00.000000",
+      "updated_at": "2025-09-30T16:05:00.000000"
+    }
+  },
+  {
+    "model": "store.product",
+    "pk": 19,
+    "fields": {
+      "name": "Linen Blend Shirt",
+      "description": "Breathable, relaxed silhouette.",
+      "price": "3290",
+      "stock": 115,
+      "image": null,
+      "category": 2,
+      "featured": false,
+      "created_at": "2025-09-18T09:30:00.000000",
+      "updated_at": "2025-09-28T13:30:00.000000"
+    }
+  },
+  {
+    "model": "store.product",
+    "pk": 20,
+    "fields": {
+      "name": "Athletic Joggers",
+      "description": "Tapered fit with zip pockets.",
+      "price": "3790",
+      "stock": 150,
+      "image": null,
+      "category": 1,
+      "featured": false,
+      "created_at": "2025-09-26T07:00:00.000000",
+      "updated_at": "2025-09-30T12:25:00.000000"
+    }
+  },
+  {
+    "model": "store.product",
+    "pk": 21,
+    "fields": {
+      "name": "Baby Fleece Romper",
+      "description": "Warm one-piece with ear hood.",
+      "price": "2390",
+      "stock": 98,
+      "image": null,
+      "category": 3,
+      "featured": false,
+      "created_at": "2025-09-27T06:45:00.000000",
+      "updated_at": "2025-09-30T09:00:00.000000"
+    }
+  },
+  {
+    "model": "store.product",
+    "pk": 22,
+    "fields": {
+      "name": "Baby Winter Sleepsack",
+      "description": "TOG 2.5 quilted sleep bag.",
+      "price": "3290",
+      "stock": 120,
+      "image": null,
+      "category": 3,
+      "featured": true,
+      "created_at": "2025-09-30T08:20:00.000000",
+      "updated_at": "2025-10-01T05:55:00.000000"
+    }
+  },
+  {
+    "model": "store.product",
+    "pk": 23,
+    "fields": {
+      "name": "Cable Knit Scarf",
+      "description": "Chunky knit with soft handfeel.",
+      "price": "1890",
+      "stock": 160,
+      "image": null,
+      "category": 2,
+      "featured": false,
+      "created_at": "2025-09-22T14:00:00.000000",
+      "updated_at": "2025-09-29T11:10:00.000000"
+    }
+  },
+  {
+    "model": "store.product",
+    "pk": 24,
+    "fields": {
+      "name": "Chelsea Boots",
+      "description": "Synthetic leather upper, rubber sole.",
+      "price": "7990",
+      "stock": 44,
+      "image": null,
+      "category": 2,
+      "featured": false,
+      "created_at": "2025-09-24T13:10:00.000000",
+      "updated_at": "2025-09-30T10:30:00.000000"
+    }
+  },
+  {
+    "model": "store.product",
+    "pk": 25,
+    "fields": {
+      "name": "Heavyweight Flannel",
+      "description": "Brushed cotton, plaid pattern.",
+      "price": "3590",
+      "stock": 103,
+      "image": null,
+      "category": 1,
+      "featured": false,
+      "created_at": "2025-09-21T17:25:00.000000",
+      "updated_at": "2025-09-29T14:42:00.000000"
+    }
+  },
+  {
+    "model": "store.product",
+    "pk": 26,
+    "fields": {
+      "name": "Performance Polo",
+      "description": "Moisture-wicking knit with UV protection.",
+      "price": "2890",
+      "stock": 131,
+      "image": null,
+      "category": 2,
+      "featured": false,
+      "created_at": "2025-09-23T18:30:00.000000",
+      "updated_at": "2025-09-30T06:35:00.000000"
+    }
+  },
+  {
+    "model": "store.product",
+    "pk": 27,
+    "fields": {
+      "name": "Quilted Liner Jacket",
+      "description": "Snap-front lightweight liner.",
+      "price": "5790",
+      "stock": 58,
+      "image": null,
+      "category": 1,
+      "featured": false,
+      "created_at": "2025-09-28T20:40:00.000000",
+      "updated_at": "2025-10-01T09:20:00.000000"
+    }
+  },
+  {
+    "model": "store.product",
+    "pk": 28,
+    "fields": {
+      "name": "Twill Baseball Cap",
+      "description": "Adjustable strap, low profile.",
+      "price": "1390",
+      "stock": 210,
+      "image": null,
+      "category": 2,
+      "featured": false,
+      "created_at": "2025-09-22T07:55:00.000000",
+      "updated_at": "2025-09-27T15:00:00.000000"
+    }
+  },
+  {
+    "model": "store.product",
+    "pk": 29,
+    "fields": {
+      "name": "Waffle Henley",
+      "description": "Three-button placket, cozy knit.",
+      "price": "2590",
+      "stock": 147,
+      "image": null,
+      "category": 2,
+      "featured": false,
+      "created_at": "2025-09-25T09:45:00.000000",
+      "updated_at": "2025-09-30T11:15:00.000000"
+    }
+  },
+  {
+    "model": "store.product",
+    "pk": 30,
+    "fields": {
+      "name": "Corduroy Trousers",
+      "description": "Straight fit, 8-wale cord.",
+      "price": "4490",
+      "stock": 76,
+      "image": null,
+      "category": 2,
+      "featured": false,
+      "created_at": "2025-09-26T19:10:00.000000",
+      "updated_at": "2025-09-29T21:00:00.000000"
+    }
+  },
+  {
+    "model": "store.product",
+    "pk": 31,
+    "fields": {
+      "name": "Baby Knit Beanie (2-Pack)",
+      "description": "Soft rib knit, gentle on skin.",
+      "price": "1490",
+      "stock": 160,
+      "image": null,
+      "category": 3,
+      "featured": false,
+      "created_at": "2025-09-23T07:30:00.000000",
+      "updated_at": "2025-09-30T08:00:00.000000"
+    }
+  },
+  {
+    "model": "store.product",
+    "pk": 32,
+    "fields": {
+      "name": "Baby Footed Pajamas",
+      "description": "Zipper closure with safety tab.",
+      "price": "2190",
+      "stock": 134,
+      "image": null,
+      "category": 3,
+      "featured": false,
+      "created_at": "2025-09-24T06:20:00.000000",
+      "updated_at": "2025-09-29T19:05:00.000000"
+    }
+  },
+  {
+    "model": "store.product",
+    "pk": 33,
+    "fields": {
+      "name": "Baby Waterproof Bibs (3-Pack)",
+      "description": "Easy wipe surface, tie closure.",
+      "price": "990",
+      "stock": 240,
+      "image": null,
+      "category": 3,
+      "featured": false,
+      "created_at": "2025-09-25T05:40:00.000000",
+      "updated_at": "2025-09-30T05:50:00.000000"
+    }
+  },
+  {
+    "model": "store.product",
+    "pk": 34,
+    "fields": {
+      "name": "Baby Thermal Leggings",
+      "description": "Soft brushed interior for warmth.",
+      "price": "1590",
+      "stock": 170,
+      "image": null,
+      "category": 3,
+      "featured": false,
+      "created_at": "2025-09-26T04:15:00.000000",
+      "updated_at": "2025-09-29T17:35:00.000000"
+    }
+  },
+  {
+    "model": "store.product",
+    "pk": 35,
+    "fields": {
+      "name": "Waterproof Shell Jacket",
+      "description": "3K/3K breathable shell for light rain.",
+      "price": "6890",
+      "stock": 52,
+      "image": null,
+      "category": 1,
+      "featured": false,
+      "created_at": "2025-09-29T10:40:00.000000",
+      "updated_at": "2025-10-01T07:25:00.000000"
+    }
+  },
+  {
+    "model": "store.product",
+    "pk": 36,
+    "fields": {
+      "name": "Suede Desert Boots",
+      "description": "Crepe sole, lace-up.",
+      "price": "7590",
+      "stock": 39,
+      "image": null,
+      "category": 2,
+      "featured": false,
+      "created_at": "2025-09-30T13:35:00.000000",
+      "updated_at": "2025-10-01T10:15:00.000000"
     }
   }
 ]

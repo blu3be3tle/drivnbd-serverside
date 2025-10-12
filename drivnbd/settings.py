@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     # Third-party
     "drf_yasg",
     "django_filters",
-    "corsheaders"
+    "corsheaders",
     "rest_framework",
     "rest_framework_simplejwt",
     "djoser",

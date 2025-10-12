@@ -39,10 +39,11 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Third-party
     "drf_yasg",
+    "django_filters",
+    "corshearders"
     "rest_framework",
     "rest_framework_simplejwt",
     "djoser",
-    "django_filters",
     "cloudinary",
     "cloudinary_storage",
     # Local

@@ -22,6 +22,11 @@ CSRF_TRUSTED_ORIGINS = [
     "https://drivnbd-serverside.vercel.app",
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5174",
+    "https://drivnbd-client.vercel.app"
+]
+
 # Apps
 INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
